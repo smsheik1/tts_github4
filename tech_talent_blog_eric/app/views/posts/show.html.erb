@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title.html_safe %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  by <%= @post.user.username.html_safe %>
+</p>
+
+<p>
+  <strong>Blog entry:</strong>
+  <%= @post.blog_entry.html_safe %>
+</p>
+
+<p>
+	<%= link_to 'Edit', edit_post_path(@post) %>
+</p>
+
+<div id="comments">
+
+    <%= render 'comments/form', comment: @comment %>
+
+	<ol>
+		<% @post.comments.each do |comment| %>
+    <strong><%= link_to comment.user.username, user_posts_path(name: comment.user.username) %> said...</strong>
+	    	<li><%= comment.author %><br /></li>
+	    	<%= comment.comment_entry %>
+    	<% end %>
+	</ol>
+
+
+</div>
+<p>
+<%= link_to 'Back', posts_path %>
+</p>
